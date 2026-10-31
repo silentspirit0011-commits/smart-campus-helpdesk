@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Campus HelpDesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <header class="navbar">
+        <div class="logo">🎓 Smart Campus <span>HelpDesk</span></div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/complaint">Submit Complaint</a>
+            <a href="/track">Track Complaint</a>
+            <a href="/admin">Admin Dashboard</a>
+        </nav>
+        <a href="/complaint" class="nav-button">Submit Complaint</a>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <div class="eyebrow">SMARTER CAMPUS MANAGEMENT</div>
+                <h1>Your Campus.<br><span>Our Priority.</span></h1>
+                <p>
+                    Report campus issues, track complaint progress,
+                    and stay informed — all from one simple platform.
+                </p>
+                <div class="hero-buttons">
+                    <a href="/complaint" class="btn primary">Submit a Complaint →</a>
+                    <a href="#how-it-works" class="btn secondary">How It Works</a>
+                </div>
+            </div>
+            <div class="hero-card">
+                <div class="card-icon">🏫</div>
+                <h2>A Better Campus Starts Here</h2>
+                <p>One platform. Faster resolutions. Happier students.</p>
+                <div class="status"><span class="dot"></span> HelpDesk Portal Online</div>
+            </div>
+        </section>
+
+        <section id="features" class="features">
+            <div class="section-heading">
+                <p>WHAT YOU CAN DO</p>
+                <h2>Everything you need in one place</h2>
+            </div>
+            <div class="feature-grid">
+                <article class="feature-card">
+                    <div class="feature-icon">📝</div>
+                    <h3>Submit a Complaint</h3>
+                    <p>Report maintenance, classroom, Wi-Fi, or hostel issues.</p>
+                    <a href="/complaint" class="feature-link">Submit Now →</a>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">🔎</div>
+                    <h3>Track Your Complaint</h3>
+                    <p>Stay updated as your complaint moves toward resolution.</p>
+                    <a href="/track" class="feature-link">Track Now →</a>
+                </article>
+                <article class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Admin Dashboard</h3>
+                    <p>Review, assign, prioritize, and resolve campus issues.</p>
+                    <a href="/admin" class="feature-link">View Dashboard →</a>
+                </article>
+            </div>
+        </section>
+
+        <section id="how-it-works" class="steps">
+            <div class="section-heading">
+                <p>SIMPLE & EFFECTIVE</p>
+                <h2>How it works</h2>
+            </div>
+            <div class="step-grid">
+                <div><strong>01</strong><h3>Report</h3><p>Describe your campus issue.</p></div>
+                <div><strong>02</strong><h3>Track</h3><p>Follow its progress.</p></div>
+                <div><strong>03</strong><h3>Resolve</h3><p>Get updates when action is taken.</p></div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact">
+        <strong>Smart Campus HelpDesk</strong>
+        <p>Cloud-Based Complaint & Maintenance System</p>
+        <small>College Cloud Computing Mini Project | Powered by AWS</small>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Smart Campus HelpDesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Smart Campus <span>HelpDesk</span></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/complaint">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/admin">Admin Dashboard</a>
+    </nav>
+</header>
+
+<main class="complaint-page" style="display: flex; align-items: center; justify-content: center; min-height: 75vh;">
+    <div class="complaint-form" style="max-width: 450px; width: 100%;">
+        <div class="complaint-heading" style="margin-bottom: 25px;">
+            <p class="eyebrow">ADMINISTRATOR PORTAL</p>
+            <h1 style="font-size: 28px;">Admin Login</h1>
+            <p>Enter your credentials to access the complaint dashboard.</p>
+        </div>
+
+        {% if error %}
+        <div class="form-message" style="color: #b91c1c; background: #fee2e2; padding: 10px 14px; border-radius: 8px; margin-bottom: 20px;">
+            {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="/admin/login" method="POST">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="e.g. admin" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="••••••••" required>
+            </div>
+
+            <div class="form-actions" style="margin-top: 25px;">
+                <a href="/" class="btn secondary">← Back Home</a>
+                <button type="submit" class="btn primary">Sign In →</button>
+            </div>
+        </form>
+    </div>
+</main>
+
+<footer>
+    <strong>Smart Campus HelpDesk</strong>
+    <p>Cloud-Based Complaint & Maintenance System</p>
+    <small>Powered by AWS</small>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,137 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >
+  Smart Campus HelpDesk - Infrastructure as Code (IaC) Template.
+  Provisions the custom VPC, Public Subnet, Security Groups, S3 Bucket, and EC2 Instance.
+
+Parameters:
+  InstanceType:
+    Type: String
+    Default: t2.micro
+    Description: EC2 compute instance type (Free Tier eligible)
+  KeyName:
+    Type: String
+    Default: vockey
+    Description: Name of existing SSH KeyPair for EC2 access
+
+Resources:
+  # 1. Custom VPC
+  SmartCampusVPC:
+    Type: AWS::EC2::VPC
+    Properties:
+      CidrBlock: 10.0.0.0/16
+      EnableDnsHostnames: true
+      EnableDnsSupport: true
+      Tags:
+        - Key: Name
+          Value: smart-campus-vpc
+
+  # 2. Internet Gateway
+  SmartCampusIGW:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Name
+          Value: smart-campus-igw
+
+  AttachGateway:
+    Type: AWS::EC2::VPCGatewayAttachment
+    Properties:
+      VpcId: !Ref SmartCampusVPC
+      InternetGatewayId: !Ref SmartCampusIGW
+
+  # 3. Public Web Subnet
+  PublicSubnet:
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId: !Ref SmartCampusVPC
+      CidrBlock: 10.0.6.0/24
+      MapPublicIpOnLaunch: true
+      AvailabilityZone: !Select [0, !GetAZs '']
+      Tags:
+        - Key: Name
+          Value: smart-campus-public-subnet
+
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+    Properties:
+      VpcId: !Ref SmartCampusVPC
+      Tags:
+        - Key: Name
+          Value: smart-campus-public-rt
+
+  DefaultPublicRoute:
+    Type: AWS::EC2::Route
+    DependsOn: AttachGateway
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0
+      GatewayId: !Ref SmartCampusIGW
+
+  SubnetRouteTableAssoc:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      SubnetId: !Ref PublicSubnet
+      RouteTableId: !Ref PublicRouteTable
+
+  # 4. Security Group for Web Tier
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for Smart Campus HelpDesk EC2
+      VpcId: !Ref SmartCampusVPC
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+          Description: Allow HTTP traffic
+        - IpProtocol: tcp
+          FromPort: 5000
+          ToPort: 5000
+          CidrIp: 0.0.0.0/0
+          Description: Allow Flask application port
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 18.206.107.24/29
+          Description: Allow EC2 Instance Connect SSH
+      Tags:
+        - Key: Name
+          Value: smart-campus-ec2-sg
+
+  # 5. Amazon S3 Bucket for Grievance Attachments
+  ComplaintsBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Sub "smart-campus-complaints-${AWS::AccountId}"
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+      VersioningConfiguration:
+        Status: Enabled
+
+  # 6. EC2 Compute Instance
+  SmartCampusEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      InstanceType: !Ref InstanceType
+      ImageId: ami-0c101f26f147fa7fd  # Amazon Linux 2023 in us-east-1
+      SubnetId: !Ref PublicSubnet
+      SecurityGroupIds:
+        - !Ref WebServerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: smart-campus-ec2
+
+Outputs:
+  VPCId:
+    Description: Custom VPC ID
+    Value: !Ref SmartCampusVPC
+  S3Bucket:
+    Description: S3 Storage Bucket
+    Value: !Ref ComplaintsBucket
+  EC2InstanceId:
+    Description: Compute Instance ID
+    Value: !Ref SmartCampusEC2

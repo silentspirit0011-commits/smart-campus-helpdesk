@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Smart Campus HelpDesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Smart Campus <span>HelpDesk</span></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/complaint">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/admin">Admin Dashboard</a>
+        <a href="/admin/logout" style="color: #b91c1c; font-weight: bold;">Logout</a>
+    </nav>
+</header>
+
+<main class="admin-page">
+
+    <div class="admin-header">
+        <div>
+            <p class="eyebrow">CAMPUS MANAGEMENT</p>
+            <h1>Admin Dashboard</h1>
+            <p>Monitor and manage campus maintenance complaints.</p>
+        </div>
+        <span class="demo-label" style="background: #dcfce7; color: #166534;">LIVE SYSTEM — DATABASE CONNECTED</span>
+    </div>
+
+    <section class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <p>Total Complaints</p>
+            <h2 id="totalCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⏳</div>
+            <p>Pending</p>
+            <h2 id="pendingCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🔧</div>
+            <p>In Progress</p>
+            <h2 id="progressCount">0</h2>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <p>Resolved</p>
+            <h2 id="resolvedCount">0</h2>
+        </div>
+    </section>
+
+    <section class="admin-table-card">
+        <div class="table-header">
+            <div>
+                <h2>Complaint Management</h2>
+                <p>Manage and update active campus complaints.</p>
+            </div>
+            <div class="table-filters">
+                <input type="search" id="searchComplaints"
+                       placeholder="Search complaints..."
+                       aria-label="Search complaints">
+
+                <select id="statusFilter" aria-label="Filter by status">
+                    <option value="All">All Statuses</option>
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Resolved">Resolved</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="table-scroll">
+            <table class="complaints-table">
+                <thead>
+                    <tr>
+                        <th>Complaint ID</th>
+                        <th>Issue</th>
+                        <th>Category</th>
+                        <th>Location</th>
+                        <th>Priority</th>
+                        <th>Status</th>
+                        <th>Update Status</th>
+                    </tr>
+                </thead>
+                <tbody id="complaintsTableBody"></tbody>
+            </table>
+        </div>
+
+        <p id="tableMessage" class="table-message"
+           role="status" aria-live="polite"></p>
+    </section>
+
+    <div class="admin-note" style="background: #f0fdf4; border-color: #86efac; color: #166534;">
+        <strong>Production Database Active:</strong>
+        Status updates are saved in real-time to SQLite / AWS RDS and tracked with audit history.
+    </div>
+
+</main>
+
+<footer>
+    <strong>Smart Campus HelpDesk</strong>
+    <p>Cloud-Based Complaint & Maintenance System</p>
+    <small>Powered by AWS</small>
+</footer>
+
+<script src="{{ url_for('static', filename='js/admin-api.js') }}"></script>
+
+</body>
+</html>

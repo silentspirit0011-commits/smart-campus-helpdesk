@@ -1,0 +1,60 @@
+# Environment & Secrets (NEVER COMMIT)
+.env
+.env.local
+credentials.txt
+
+# Database files
+*.db
+*.sqlite3
+instance/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# Uploaded student temporary files
+uploads/
+
+# Testing & Cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# AWS Lab temporary files & unrelated lab assets
+instructions/
+CFTemplatesRepo/
+downloads/
+logs/
+evidence/
+*.tar.gz
+cafe-*.yaml
+S3.yaml
+phase*.json
+s3_notification.json
+sns_policy.json
+sqs_policy.json
+Self_Reflection*
+
+# Unrelated lab automation scripts
+scripts/task*.py
+scripts/setup_*.py
+scripts/solve_*.py
+scripts/verify_*.py
+scripts/configure_*.py
+scripts/monitor_*.py
+scripts/replicate_*.py
+scripts/clone_repo.py
+scripts/execute_linux_tasks.py
+scripts/fetch_templates.py
+scripts/fix_php.py
+scripts/generate_reflection*.py
+scripts/ssm_exec.py
+scripts/submit_answers.py
+scripts/test_phase2.py
+scripts/test_pipeline.py
+scripts/wait_and_import.py
+scripts/*.ps1

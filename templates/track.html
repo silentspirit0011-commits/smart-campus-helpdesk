@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Complaint | Smart Campus HelpDesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Smart Campus <span>HelpDesk</span></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/complaint">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/admin">Admin Dashboard</a>
+    </nav>
+</header>
+
+<main class="tracking-page">
+
+    <section class="tracking-heading">
+        <p class="eyebrow">STAY INFORMED</p>
+        <h1>Track Your Complaint</h1>
+        <p>
+            Enter your complaint ID to check the progress
+            of your reported campus issue.
+        </p>
+    </section>
+
+    <section class="tracking-card">
+        <div class="tracking-icon">🔎</div>
+        <h2>Find Your Complaint</h2>
+        <p>Use the complaint ID provided after submission.</p>
+
+        <form id="trackingForm">
+            <label for="complaintId">Complaint ID</label>
+            <div class="tracking-search">
+                <input
+                    type="text"
+                    id="complaintId"
+                    name="complaint_id"
+                    placeholder="e.g. CMP-000101"
+                    maxlength="50"
+                    required
+                >
+                <button type="submit" class="btn primary">
+                    Track Complaint
+                </button>
+            </div>
+        </form>
+
+        <div id="trackingMessage"
+             class="tracking-message"
+             role="status"
+             aria-live="polite"></div>
+             
+        <div id="trackingDetails" style="margin-top: 25px; display: none;"></div>
+    </section>
+
+    <section class="tracking-preview">
+        <h2>How complaint tracking works</h2>
+        <p>Your complaint moves through these stages toward resolution.</p>
+
+        <div class="timeline">
+            <div class="timeline-step">
+                <div class="timeline-circle">1</div>
+                <h3>Pending</h3>
+                <p>Your complaint has been received and logged.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-circle">2</div>
+                <h3>In Progress</h3>
+                <p>The maintenance team is actively working on your issue.</p>
+            </div>
+
+            <div class="timeline-step">
+                <div class="timeline-circle">3</div>
+                <h3>Resolved</h3>
+                <p>Your complaint has been successfully resolved.</p>
+            </div>
+        </div>
+    </section>
+
+    <div class="tracking-back">
+        <a href="/" class="btn secondary">← Back to Home</a>
+    </div>
+
+</main>
+
+<footer>
+    <strong>Smart Campus HelpDesk</strong>
+    <p>Cloud-Based Complaint & Maintenance System</p>
+    <small>Powered by AWS</small>
+</footer>
+
+<script src="{{ url_for('static', filename='js/track-api.js') }}"></script>
+
+</body>
+</html>

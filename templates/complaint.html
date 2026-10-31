@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Complaint | Smart Campus HelpDesk</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<header class="navbar">
+    <div class="logo">🎓 Smart Campus <span>HelpDesk</span></div>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/complaint">Submit Complaint</a>
+        <a href="/track">Track Complaint</a>
+        <a href="/admin">Admin Dashboard</a>
+    </nav>
+</header>
+
+<main class="complaint-page">
+    <div class="complaint-heading">
+        <p class="eyebrow">STUDENT HELP DESK</p>
+        <h1>Submit a Complaint</h1>
+        <p>Tell us what's happening on campus. Every issue deserves attention.</p>
+    </div>
+
+    <form id="complaintForm" class="complaint-form"
+          enctype="multipart/form-data">
+
+        <div class="form-section-title">
+            <h2>Student Information</h2>
+            <p>Enter your contact details.</p>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="student_name">Full Name *</label>
+                <input type="text" id="student_name"
+                       name="student_name" placeholder="Your full name"
+                       maxlength="100" required>
+            </div>
+
+            <div class="form-group">
+                <label for="student_email">Email Address *</label>
+                <input type="email" id="student_email"
+                       name="student_email" placeholder="you@college.edu"
+                       maxlength="254" required>
+            </div>
+        </div>
+
+        <div class="form-section-title">
+            <h2>Complaint Details</h2>
+            <p>Help the maintenance team understand your issue.</p>
+        </div>
+
+        <div class="form-group">
+            <label for="title">Complaint Title *</label>
+            <input type="text" id="title" name="title"
+                   placeholder="e.g. Projector not working in Room 204"
+                   maxlength="150" required>
+        </div>
+
+        <div class="form-grid">
+            <div class="form-group">
+                <label for="category">Category *</label>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Electrical">Electrical</option>
+                    <option value="Wi-Fi / Internet">Wi-Fi / Internet</option>
+                    <option value="Classroom Equipment">Classroom Equipment</option>
+                    <option value="Plumbing">Plumbing</option>
+                    <option value="Hostel">Hostel</option>
+                    <option value="Cleanliness">Cleanliness</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="priority">Priority *</label>
+                <select id="priority" name="priority" required>
+                    <option value="">Select priority</option>
+                    <option value="Low">Low - Minor issue</option>
+                    <option value="Medium">Medium - Needs attention</option>
+                    <option value="High">High - Urgent issue</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="location">Campus Location *</label>
+            <input type="text" id="location" name="location"
+                   placeholder="e.g. Main Building, Room 204"
+                   maxlength="200" required>
+        </div>
+
+        <div class="form-group">
+            <label for="description">Describe Your Issue *</label>
+            <textarea id="description" name="description"
+                      rows="6" maxlength="3000"
+                      placeholder="Explain the issue in detail..."
+                      required></textarea>
+        </div>
+
+        <div class="form-group">
+            <label for="image">Attach an Image (Optional)</label>
+            <input type="file" id="image" name="image"
+                   accept="image/jpeg,image/png,image/webp">
+            <small>JPG, PNG or WebP. Maximum 5 MB.</small>
+        </div>
+
+        <div id="formMessage" class="form-message"
+             role="status" aria-live="polite"></div>
+
+        <div class="form-actions">
+            <a href="/" class="btn secondary">← Back Home</a>
+            <button type="submit" class="btn primary">
+                Submit Complaint →
+            </button>
+        </div>
+    </form>
+</main>
+
+<footer>
+    <strong>Smart Campus HelpDesk</strong>
+    <p>Cloud-Based Complaint & Maintenance System</p>
+    <small>Powered by AWS</small>
+</footer>
+
+<script src="{{ url_for('static', filename='js/complaint-api.js') }}"></script>
+</body>
+</html>
