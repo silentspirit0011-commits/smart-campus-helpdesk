@@ -10,6 +10,22 @@
 [![AWS CloudWatch](https://img.shields.io/badge/AWS-CloudWatch-yellow?logo=amazoncloudwatch&logoColor=white)](https://aws.amazon.com/cloudwatch/)
 [![Tests](https://img.shields.io/badge/Tests-11%2F11%20Passed-brightgreen?logo=pytest&logoColor=white)](tests/test_app.py)
 [![Free Tier](https://img.shields.io/badge/Cost-%240.00%2Fmo%20(Free%20Tier)-success)](#-cost-optimization--free-tier-compliance)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-http%3A%2F%2F44.219.13.156%3A5000-success?style=for-the-badge&logo=googlechrome&logoColor=white)](http://44.219.13.156:5000/)
+
+---
+
+### 🌐 Live Cloud Deployment & Quick Links
+
+> 🚀 **Live Working URL:** [http://44.219.13.156:5000/](http://44.219.13.156:5000/)  
+> *(Hosted on Amazon EC2 `t2.micro` with AWS Elastic IP, connected to Amazon RDS MySQL, Amazon S3, and Amazon SNS)*
+
+| Portal / Service | Direct Working Link | Description & Access Credentials |
+|:-----------------|:-------------------|:----------------------------------|
+| 🏛️ **Student Portal** | [http://44.219.13.156:5000/](http://44.219.13.156:5000/) | Main campus landing page and portal navigation |
+| 📝 **File a Grievance** | [http://44.219.13.156:5000/complaint](http://44.219.13.156:5000/complaint) | Submit complaint with photo attachment streamed to Amazon S3 |
+| 🔍 **Track Grievance** | [http://44.219.13.156:5000/track](http://44.219.13.156:5000/track) | Public grievance status timeline lookup (`CMP-XXXXXXXX`) |
+| 🔒 **Admin Management** | [http://44.219.13.156:5000/admin](http://44.219.13.156:5000/admin) | **Username:** `admin` \| **Password:** `adminpassword123` |
+| 🩺 **Cloud Health API** | [http://44.219.13.156:5000/health](http://44.219.13.156:5000/health) | Live JSON healthcheck verifying RDS, S3, and SNS status |
 
 ---
 
